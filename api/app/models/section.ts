@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeFetch, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Division from './division.js'
+import type { ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
 
 export default class Section extends BaseModel {
   static table = 'section'
@@ -29,4 +30,9 @@ export default class Section extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @beforeFetch()
+  static includeDivision(query: ModelQueryBuilderContract<typeof Section>) {
+    query.preload('division')
+  }
 }

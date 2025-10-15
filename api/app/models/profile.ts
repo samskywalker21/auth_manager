@@ -5,6 +5,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import hash from '@adonisjs/core/services/hash'
 import Section from './section.js'
+import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['username'],
@@ -13,6 +14,14 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 
 export default class Profile extends compose(BaseModel, AuthFinder) {
   static table = 'profile'
+
+  static accessTokens = DbAccessTokensProvider.forModel(Profile, {
+    expiresIn: '8 hours',
+    prefix: 'oat_',
+    table: 'auth_access_tokens',
+    type: 'auth_token',
+    tokenSecretLength: 40,
+  })
 
   @column({ isPrimary: true })
   declare id: number

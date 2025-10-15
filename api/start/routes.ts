@@ -8,9 +8,11 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 const DivisionController = () => import('#controllers/divisions_controller')
 const SectionController = () => import('#controllers/sections_controller')
 const ProfileController = () => import('#controllers/profiles_controller')
+const AuthController = () => import('#controllers/auth_controller')
 
 router
   .group(() => {
@@ -23,6 +25,8 @@ router
         router.patch('update/:id', [DivisionController, 'updateDivision'])
       })
       .prefix('division')
+      .use(middleware.auth({ guards: ['api'] }))
+
     router
       .group(() => {
         router.get('all', [SectionController, 'getAllSections'])
@@ -32,6 +36,7 @@ router
         router.patch('update/:id', [SectionController, 'updateSection'])
       })
       .prefix('section')
+      .use(middleware.auth({ guards: ['api'] }))
     router
       .group(() => {
         router.get('all', [ProfileController, 'getAllProfiles'])
@@ -41,5 +46,12 @@ router
         router.patch('update/:id', [ProfileController, 'updateProfile'])
       })
       .prefix('profile')
+      .use(middleware.auth({ guards: ['api'] }))
+    router
+      .group(() => {
+        router.post('login', [AuthController, 'login'])
+        router.post('logout', [AuthController, 'logout'])
+      })
+      .prefix('auth')
   })
   .prefix('api')
