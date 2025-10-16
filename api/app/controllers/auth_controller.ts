@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import { Secret } from '@adonisjs/core/helpers'
 import Profile from '#models/profile'
-import { authLogin } from '#validators/auth'
+import { authLogin, verifyToken } from '#validators/auth'
 
 export default class AuthController {
   async login({ request }: HttpContext) {
@@ -10,6 +11,17 @@ export default class AuthController {
     const token = await Profile.accessTokens.create(user)
 
     return { access_token: token.value?.release() }
+  }
+
+  async validateToken({ request }: HttpContext) {
+    await request.validateUsing(verifyToken)
+    const token = new Secret(request.body().token)
+    const res = await Profile.accessTokens.verify(token)
+    if (!res) {
+      return false
+    }
+
+    return true
   }
 
   async logout({ auth }: HttpContext) {

@@ -6,3 +6,9 @@ export const authLogin = vine.compile(
     password: vine.string().minLength(1),
   })
 )
+
+export const verifyToken = vine.compile(
+  vine.object({
+    token: vine.string().minLength(1),
+  })
+)

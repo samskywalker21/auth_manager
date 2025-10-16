@@ -50,7 +50,8 @@ router
     router
       .group(() => {
         router.post('login', [AuthController, 'login'])
-        router.post('logout', [AuthController, 'logout'])
+        router.post('logout', [AuthController, 'logout']).use(middleware.auth({ guards: ['api'] }))
+        router.post('verify', [AuthController, 'validateToken'])
       })
       .prefix('auth')
   })
