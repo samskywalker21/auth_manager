@@ -1,5 +1,5 @@
-import Profile from '#models/profile'
-import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import Profile from '#models/profile';
+import { BaseSeeder } from '@adonisjs/lucid/seeders';
 
 export default class extends BaseSeeder {
   async run() {
@@ -12,7 +12,8 @@ export default class extends BaseSeeder {
         password: 'admin',
         isAdmin: true,
         sectionId: 1,
+        status: 'A',
       },
-    ])
+    ]);
   }
 }
