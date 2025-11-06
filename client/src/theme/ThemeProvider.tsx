@@ -8,6 +8,7 @@ const theme = createTheme({
   black: '#28282B',
   autoContrast: true,
   primaryColor: 'green',
+  luminanceThreshold: 0.4,
 });
 
 const colorSchemeManager = localStorageColorSchemeManager({

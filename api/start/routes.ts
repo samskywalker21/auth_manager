@@ -30,7 +30,6 @@ router
     router
       .group(() => {
         router.get('all', [SectionController, 'getAllSections']);
-        router.get('active', [SectionController, 'getActiveSections']);
         router.get(':id', [SectionController, 'getSectionById']);
         router.post('insert', [SectionController, 'insertSection']);
         router.patch('update/:id', [SectionController, 'updateSection']);
@@ -55,5 +54,6 @@ router
       })
       .prefix('auth');
     router.post('register', [ProfileController, 'insertProfile']);
+    router.get('register/sections', [SectionController, 'getActiveSections']);
   })
   .prefix('api');
