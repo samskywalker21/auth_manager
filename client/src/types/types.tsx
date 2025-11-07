@@ -1,19 +1,10 @@
-export type SectionType = {
-  id: number;
-  sectionName: string;
-  sectionCode: string;
-  status: string;
-  divisionId: number;
-  createdAt: string;
-  updatedAt: string;
-  division: {
-    id: number;
-    divisionName: string;
-    divisionCode: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-  };
+export type SectionOptionsType = {
+  section_id: number;
+  section_name: string;
+  section_code: string;
+  division_id: number;
+  division_name: string;
+  division_code: string;
 };
 
 export type RegisterProfileType = {

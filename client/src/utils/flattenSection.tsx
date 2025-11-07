@@ -1,35 +1,35 @@
-import type { SectionType } from '../types/types';
+import type { SectionOptionsType } from '../types/types';
 
-const flattenSection = (list: SectionType[]) => {
-  const msd = list?.filter((row: SectionType) => row.divisionId === 1);
-  const lhsd = list?.filter((row: SectionType) => row.divisionId === 2);
-  const rled = list?.filter((row: SectionType) => row.divisionId === 3);
-  const ord = list?.filter((row: SectionType) => row.divisionId === 4);
-  const pcdoho = list?.filter((row: SectionType) => row.divisionId === 5);
+const flattenSection = (list: SectionOptionsType[]) => {
+  const msd = list?.filter((row: SectionOptionsType) => row.division_id === 1);
+  const lhsd = list?.filter((row: SectionOptionsType) => row.division_id === 2);
+  const rled = list?.filter((row: SectionOptionsType) => row.division_id === 3);
+  const ord = list?.filter((row: SectionOptionsType) => row.division_id === 4);
+  const pcdoho = list?.filter((row: SectionOptionsType) => row.division_id === 5);
 
-  const nmsd = msd?.map((row: SectionType) => ({
-    value: String(row.id),
-    label: `${row.sectionName} (${row.sectionCode})`,
+  const nmsd = msd?.map((row: SectionOptionsType) => ({
+    value: String(row.section_id),
+    label: `${row.section_name} (${row.section_code})`,
   }));
 
-  const nlhsd = lhsd?.map((row: SectionType) => ({
-    value: String(row.id),
-    label: `${row.sectionName} (${row.sectionCode})`,
+  const nlhsd = lhsd?.map((row: SectionOptionsType) => ({
+    value: String(row.section_id),
+    label: `${row.section_name} (${row.section_code})`,
   }));
 
-  const nrled = rled?.map((row: SectionType) => ({
-    value: String(row.id),
-    label: `${row.sectionName} (${row.sectionCode})`,
+  const nrled = rled?.map((row: SectionOptionsType) => ({
+    value: String(row.section_id),
+    label: `${row.section_name} (${row.section_code})`,
   }));
 
-  const nord = ord?.map((row: SectionType) => ({
-    value: String(row.id),
-    label: `${row.sectionName} (${row.sectionCode})`,
+  const nord = ord?.map((row: SectionOptionsType) => ({
+    value: String(row.section_id),
+    label: `${row.section_name} (${row.section_code})`,
   }));
 
-  const npcdoho = pcdoho?.map((row: SectionType) => ({
-    value: String(row.id),
-    label: `${row.sectionName} (${row.sectionCode})`,
+  const npcdoho = pcdoho?.map((row: SectionOptionsType) => ({
+    value: String(row.section_id),
+    label: `${row.section_name} (${row.section_code})`,
   }));
 
   const sectionOptions = [

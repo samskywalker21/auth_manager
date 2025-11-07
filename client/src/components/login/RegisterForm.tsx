@@ -1,5 +1,7 @@
 import { Stack, TextInput, PasswordInput, Button, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { modals } from '@mantine/modals';
+import { ChevronLeft } from 'lucide-react';
 import useGetSections from '../../hooks/useGetSections';
 import flattenSection from '../../utils/flattenSection';
 import useRegister from '../../hooks/useRegister';
@@ -94,7 +96,8 @@ const RegisterForm = ({ invertSelection }: { invertSelection: () => void }) => {
         </Stack>
       </form>
 
-      <Button onClick={invertSelection} variant="transparent" fullWidth={false}>
+      <Button onClick={invertSelection} fullWidth={false} variant="transparent" p={0} mt={'1vh'}>
+        <ChevronLeft />
         BACK TO LOGIN
       </Button>
     </>

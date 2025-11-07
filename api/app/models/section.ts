@@ -10,25 +10,25 @@ export default class Section extends BaseModel {
   @column({ isPrimary: true })
   declare id: number;
 
-  @column()
+  @column({ serializeAs: 'section_name' })
   declare sectionName: string;
 
-  @column()
+  @column({ serializeAs: 'section_code' })
   declare sectionCode: string;
 
   @column()
   declare status: 'A' | 'I';
 
-  @column()
+  @column({ serializeAs: 'division_id' })
   declare divisionId: number;
 
   @belongsTo(() => Division)
   declare division: BelongsTo<typeof Division>;
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: 'created_at' })
   declare createdAt: DateTime;
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: 'updated_at' })
   declare updatedAt: DateTime;
 
   @beforeFetch()
