@@ -13,8 +13,11 @@
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/react-router": "^1.136.1",
     "@tanstack/react-router-devtools": "^1.136.1",
+    "lucide": "^0.554.0",
+    "lucide-react": "^0.554.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-hook-form": "^7.66.1",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
