@@ -1,9 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
+import HomePanel from '../../components/dashboard/HomePanel';
 
 export const Route = createFileRoute('/dashboard/')({
-	component: RouteComponent,
+	component: HomePanel,
 });
-
-function RouteComponent() {
-	return <div>Hello "/dashboard/"!</div>;
-}

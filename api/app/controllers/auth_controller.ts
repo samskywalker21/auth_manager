@@ -28,4 +28,9 @@ export default class AuthController {
     await auth.use('api').invalidateToken()
     return { message: 'Logout successful' }
   }
+
+  async isAdmin({ auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+    return user.isAdmin
+  }
 }
