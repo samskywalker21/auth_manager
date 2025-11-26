@@ -13,6 +13,16 @@ export default class AuthController {
     return { access_token: token.value?.release() }
   }
 
+  async logout({ auth }: HttpContext) {
+    await auth.use('api').invalidateToken()
+    return { message: 'Logout successful' }
+  }
+
+  async getProfile({ auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+    return user
+  }
+
   async validateToken({ request }: HttpContext) {
     await request.validateUsing(verifyToken)
     const token = new Secret(request.body().token)
@@ -20,13 +30,7 @@ export default class AuthController {
     if (!res) {
       return false
     }
-
     return true
-  }
-
-  async logout({ auth }: HttpContext) {
-    await auth.use('api').invalidateToken()
-    return { message: 'Logout successful' }
   }
 
   async isAdmin({ auth }: HttpContext) {

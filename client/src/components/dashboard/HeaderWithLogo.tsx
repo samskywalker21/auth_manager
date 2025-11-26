@@ -21,7 +21,10 @@ const HeaderWithLogo = () => {
 					fit='contain'
 				/>
 			</Flex>
-			<Flex direction='column'>
+			<Flex
+				direction='column'
+				display={{ base: 'none', sm: 'block' }}
+			>
 				<Title order={4}>DEPARTMENT OF HEALTH</Title>
 				<Text size='sm'>Center for Health Development - Northern Mindanao</Text>
 			</Flex>

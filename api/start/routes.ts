@@ -50,10 +50,13 @@ router
       .group(() => {
         router.post('login', [AuthController, 'login'])
         router.post('logout', [AuthController, 'logout']).use(middleware.auth({ guards: ['api'] }))
+        router.post('verify', [AuthController, 'validateToken'])
+        router
+          .get('get_profile', [AuthController, 'getProfile'])
+          .use(middleware.auth({ guards: ['api'] }))
         router
           .get('is_admin', [AuthController, 'isAdmin'])
           .use(middleware.auth({ guards: ['api'] }))
-        router.post('verify', [AuthController, 'validateToken'])
       })
       .prefix('auth')
     router.post('register', [ProfileController, 'insertProfile'])

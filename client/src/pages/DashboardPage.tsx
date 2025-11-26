@@ -11,7 +11,11 @@ const DashboardPage = () => {
 		<>
 			<AppShell
 				header={{ height: '75px', offset: true }}
-				navbar={{ width: '250px', breakpoint: 'sm' }}
+				navbar={{
+					width: '250px',
+					breakpoint: 'sm',
+					collapsed: { desktop: false, mobile: true },
+				}}
 			>
 				<AppShell.Header>
 					<Flex

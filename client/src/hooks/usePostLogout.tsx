@@ -30,6 +30,7 @@ const usePostLogout = () => {
 			notifications.show({
 				title: 'Opppsss!',
 				message: 'Something went wrong.',
+				color: 'red',
 			});
 		},
 	});

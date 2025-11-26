@@ -40,7 +40,8 @@ const RegisterForm = () => {
 
 	const handleSubmit = (values: typeof form.values) => {
 		const section_id = Number(values.section_id);
-		const data = { ...values, section_id };
+		const position = values.position.toUpperCase();
+		const data = { ...values, section_id, position };
 		mutation.mutate(data);
 		if (mutation.isSuccess) {
 			form.reset();
