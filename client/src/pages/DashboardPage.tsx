@@ -1,12 +1,18 @@
 import { AppShell, Box, Flex, NavLink } from '@mantine/core';
 import { Outlet } from '@tanstack/react-router';
 import HeaderWithLogo from '../components/dashboard/HeaderWithLogo';
-import { House, ShieldUser, Users } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
 import HeaderUser from '../components/dashboard/HeaderUser';
 import NavBarMenus from '../components/dashboard/NavBarMenus';
+import { DoorOpen } from 'lucide-react';
+import usePostLogout from '../hooks/usePostLogout';
 
 const DashboardPage = () => {
+	const logout = usePostLogout();
+
+	const handleLogOut = () => {
+		logout.mutate();
+	};
+
 	return (
 		<>
 			<AppShell
@@ -31,8 +37,18 @@ const DashboardPage = () => {
 					</Flex>
 				</AppShell.Header>
 				<AppShell.Navbar>
-					<AppShell.Section pt={'sm'}>
+					<AppShell.Section
+						pt={'sm'}
+						grow
+					>
 						<NavBarMenus />
+					</AppShell.Section>
+					<AppShell.Section pb={'5rem'}>
+						<NavLink
+							label='Logout'
+							leftSection={<DoorOpen size={'1rem'} />}
+							onClick={handleLogOut}
+						/>
 					</AppShell.Section>
 				</AppShell.Navbar>
 				<AppShell.Main>

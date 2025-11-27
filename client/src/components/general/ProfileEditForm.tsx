@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { Button, PasswordInput, Select, TextInput } from '@mantine/core';
+import {
+	Button,
+	Loader,
+	PasswordInput,
+	Select,
+	TextInput,
+} from '@mantine/core';
 import type { ProfileEdit } from '../../types';
 import { useForm } from '@mantine/form';
 import useGetSectionOptions from '../../hooks/useGetSectionOptions';
@@ -103,31 +109,31 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 			>
 				<TextInput
 					label='First Name'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					key={form.key('first_name')}
 					{...form.getInputProps('first_name')}
 				/>
 				<TextInput
 					label='Middle Name'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					key={form.key('middle_name')}
 					{...form.getInputProps('middle_name')}
 				/>
 				<TextInput
 					label='Last Name'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					key={form.key('last_name')}
 					{...form.getInputProps('last_name')}
 				/>
 				<TextInput
 					label='Position'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					key={form.key('position')}
 					{...form.getInputProps('position')}
 				/>
 				<Select
 					label='Section'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					searchable
 					checkIconPosition='right'
 					nothingFoundMessage='No sections found.'
@@ -137,19 +143,19 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 				/>
 				<TextInput
 					label='Username'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					key={form.key('username')}
 					{...form.getInputProps('username')}
 				/>
 				<PasswordInput
 					label='Password'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					key={form.key('password')}
 					{...form.getInputProps('password')}
 				/>
 				<Select
 					label='Status'
-					disabled={displayOnly}
+					disabled={displayOnly || mutate.isPending}
 					searchable
 					checkIconPosition='right'
 					key={form.key('status')}
@@ -166,7 +172,7 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 						fullWidth
 						mt={'md'}
 					>
-						SAVE
+						{mutate.isPending ? <Loader type='dots' /> : 'SAVE'}
 					</Button>
 				)}
 			</form>
@@ -183,11 +189,11 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 				type='reset'
 				variant='light'
 				color='red'
-				disabled={displayOnly}
+				disabled={displayOnly || mutate.isPending}
 				fullWidth
 				onClick={toggleForm}
 			>
-				CANCEL
+				{mutate.isPending ? <Loader type='dots' /> : 'CANCEL'}
 			</Button>
 		</>
 	);

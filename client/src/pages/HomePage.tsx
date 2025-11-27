@@ -13,6 +13,7 @@ const HomePage = () => {
 				direction='column'
 				gap={'md'}
 				pr={'10rem'}
+				pt={'1rem'}
 			>
 				{query.isPending && 'Waiting'}
 				{query.isSuccess && <ProfileEditForm profile={query.data?.data} />}
