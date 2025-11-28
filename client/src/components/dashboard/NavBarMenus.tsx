@@ -1,5 +1,5 @@
 import { NavLink } from '@mantine/core';
-import { House, ShieldUser, Users } from 'lucide-react';
+import { House, LayoutPanelTop, ShieldUser, Users } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import useIsUserAdmin from '../../hooks/useIsUserAdmin';
 
@@ -25,6 +25,18 @@ const NavBarMenus = () => {
 						leftSection={<Users size={'1rem'} />}
 						component={Link}
 						to='/dashboard/admin/profiles'
+					/>
+					<NavLink
+						label='Sections'
+						leftSection={<LayoutPanelTop size={'1rem'} />}
+						component={Link}
+						to='/dashboard/admin/sections'
+					/>
+					<NavLink
+						label='Divisions'
+						leftSection={<LayoutPanelTop size={'1rem'} />}
+						component={Link}
+						to='/dashboard/admin/divisions'
 					/>
 				</NavLink>
 			) : null}

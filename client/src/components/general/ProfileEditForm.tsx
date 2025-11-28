@@ -31,7 +31,6 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 			section_id: String(profile.section_id) || '0',
 			username: profile.username || '',
 			password: '',
-			status: profile.status || '',
 			is_admin: profile.is_admin || false,
 		},
 		validate: {
@@ -80,7 +79,6 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 					return value.length < 3 ? true : null;
 				}
 			},
-			status: (value) => (value !== 'A' ? (value !== 'I' ? true : null) : null),
 		},
 	});
 
@@ -152,18 +150,6 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 					disabled={displayOnly || mutate.isPending}
 					key={form.key('password')}
 					{...form.getInputProps('password')}
-				/>
-				<Select
-					label='Status'
-					disabled={displayOnly || mutate.isPending}
-					searchable
-					checkIconPosition='right'
-					key={form.key('status')}
-					{...form.getInputProps('status')}
-					data={[
-						{ value: 'A', label: 'Active' },
-						{ value: 'I', label: 'Inactive' },
-					]}
 				/>
 				{displayOnly ? null : (
 					<Button

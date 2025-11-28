@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardAdminSectionsRouteImport } from './routes/dashboard/admin/sections'
 import { Route as DashboardAdminProfilesRouteImport } from './routes/dashboard/admin/profiles'
+import { Route as DashboardAdminDivisionsRouteImport } from './routes/dashboard/admin/divisions'
 
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
@@ -29,9 +31,19 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAdminSectionsRoute = DashboardAdminSectionsRouteImport.update({
+  id: '/admin/sections',
+  path: '/admin/sections',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardAdminProfilesRoute = DashboardAdminProfilesRouteImport.update({
   id: '/admin/profiles',
   path: '/admin/profiles',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAdminDivisionsRoute = DashboardAdminDivisionsRouteImport.update({
+  id: '/admin/divisions',
+  path: '/admin/divisions',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -39,31 +51,50 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/admin/divisions': typeof DashboardAdminDivisionsRoute
   '/dashboard/admin/profiles': typeof DashboardAdminProfilesRoute
+  '/dashboard/admin/sections': typeof DashboardAdminSectionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/admin/divisions': typeof DashboardAdminDivisionsRoute
   '/dashboard/admin/profiles': typeof DashboardAdminProfilesRoute
+  '/dashboard/admin/sections': typeof DashboardAdminSectionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/admin/divisions': typeof DashboardAdminDivisionsRoute
   '/dashboard/admin/profiles': typeof DashboardAdminProfilesRoute
+  '/dashboard/admin/sections': typeof DashboardAdminSectionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/dashboard/' | '/dashboard/admin/profiles'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/'
+    | '/dashboard/admin/divisions'
+    | '/dashboard/admin/profiles'
+    | '/dashboard/admin/sections'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/dashboard/admin/profiles'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/admin/divisions'
+    | '/dashboard/admin/profiles'
+    | '/dashboard/admin/sections'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
     | '/dashboard/'
+    | '/dashboard/admin/divisions'
     | '/dashboard/admin/profiles'
+    | '/dashboard/admin/sections'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/admin/sections': {
+      id: '/dashboard/admin/sections'
+      path: '/admin/sections'
+      fullPath: '/dashboard/admin/sections'
+      preLoaderRoute: typeof DashboardAdminSectionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/admin/profiles': {
       id: '/dashboard/admin/profiles'
       path: '/admin/profiles'
@@ -101,17 +139,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminProfilesRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/admin/divisions': {
+      id: '/dashboard/admin/divisions'
+      path: '/admin/divisions'
+      fullPath: '/dashboard/admin/divisions'
+      preLoaderRoute: typeof DashboardAdminDivisionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
 interface DashboardRouteChildren {
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardAdminDivisionsRoute: typeof DashboardAdminDivisionsRoute
   DashboardAdminProfilesRoute: typeof DashboardAdminProfilesRoute
+  DashboardAdminSectionsRoute: typeof DashboardAdminSectionsRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardAdminDivisionsRoute: DashboardAdminDivisionsRoute,
   DashboardAdminProfilesRoute: DashboardAdminProfilesRoute,
+  DashboardAdminSectionsRoute: DashboardAdminSectionsRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(

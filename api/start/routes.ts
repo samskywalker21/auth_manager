@@ -12,6 +12,7 @@ import { middleware } from './kernel.js'
 const DivisionController = () => import('#controllers/divisions_controller')
 const SectionController = () => import('#controllers/sections_controller')
 const ProfileController = () => import('#controllers/profiles_controller')
+const RolesController = () => import('#controllers/roles_controller')
 const AuthController = () => import('#controllers/auth_controller')
 
 router
@@ -43,6 +44,9 @@ router
         router.get(':id', [ProfileController, 'getProfileById'])
         router.post('insert', [ProfileController, 'insertProfile'])
         router.patch('update/:id', [ProfileController, 'updateProfile'])
+        router.get('roles/:id', [RolesController, 'getUserRoles'])
+        router.post('roles', [RolesController, 'insertUserRoles'])
+        router.patch('roles', [RolesController, 'updateUserRoles'])
       })
       .prefix('profile')
       .use(middleware.auth({ guards: ['api'] }))
