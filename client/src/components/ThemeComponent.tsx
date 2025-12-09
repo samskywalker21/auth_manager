@@ -3,6 +3,7 @@ import '@mantine/notifications/styles.css';
 
 import { createTheme, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import { ModalsProvider } from '@mantine/modals';
 
 const theme = createTheme({
 	focusRing: 'auto',
@@ -21,7 +22,7 @@ const ThemeComponent = ({ children }: { children: React.ReactNode }) => {
 				defaultColorScheme='auto'
 			>
 				<Notifications />
-				{children}
+				<ModalsProvider>{children}</ModalsProvider>
 			</MantineProvider>
 		</>
 	);

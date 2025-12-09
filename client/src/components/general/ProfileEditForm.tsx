@@ -4,6 +4,7 @@ import {
 	Loader,
 	PasswordInput,
 	Select,
+	Stack,
 	TextInput,
 } from '@mantine/core';
 import type { ProfileEdit } from '../../types';
@@ -105,52 +106,54 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 				onSubmit={form.onSubmit(handleSubmit)}
 				onReset={form.onReset}
 			>
-				<TextInput
-					label='First Name'
-					disabled={displayOnly || mutate.isPending}
-					key={form.key('first_name')}
-					{...form.getInputProps('first_name')}
-				/>
-				<TextInput
-					label='Middle Name'
-					disabled={displayOnly || mutate.isPending}
-					key={form.key('middle_name')}
-					{...form.getInputProps('middle_name')}
-				/>
-				<TextInput
-					label='Last Name'
-					disabled={displayOnly || mutate.isPending}
-					key={form.key('last_name')}
-					{...form.getInputProps('last_name')}
-				/>
-				<TextInput
-					label='Position'
-					disabled={displayOnly || mutate.isPending}
-					key={form.key('position')}
-					{...form.getInputProps('position')}
-				/>
-				<Select
-					label='Section'
-					disabled={displayOnly || mutate.isPending}
-					searchable
-					checkIconPosition='right'
-					nothingFoundMessage='No sections found.'
-					key={form.key('section_id')}
-					{...form.getInputProps('section_id')}
-					data={section_options ?? []}
-				/>
-				<TextInput
-					label='Username'
-					disabled={displayOnly || mutate.isPending}
-					key={form.key('username')}
-					{...form.getInputProps('username')}
-				/>
-				<PasswordInput
-					label='Password'
-					disabled={displayOnly || mutate.isPending}
-					key={form.key('password')}
-					{...form.getInputProps('password')}
-				/>
+				<Stack gap={'sm'}>
+					<TextInput
+						label='First Name'
+						disabled={displayOnly || mutate.isPending}
+						key={form.key('first_name')}
+						{...form.getInputProps('first_name')}
+					/>
+					<TextInput
+						label='Middle Name'
+						disabled={displayOnly || mutate.isPending}
+						key={form.key('middle_name')}
+						{...form.getInputProps('middle_name')}
+					/>
+					<TextInput
+						label='Last Name'
+						disabled={displayOnly || mutate.isPending}
+						key={form.key('last_name')}
+						{...form.getInputProps('last_name')}
+					/>
+					<TextInput
+						label='Position'
+						disabled={displayOnly || mutate.isPending}
+						key={form.key('position')}
+						{...form.getInputProps('position')}
+					/>
+					<Select
+						label='Section'
+						disabled={displayOnly || mutate.isPending}
+						searchable
+						checkIconPosition='right'
+						nothingFoundMessage='No sections found.'
+						key={form.key('section_id')}
+						{...form.getInputProps('section_id')}
+						data={section_options ?? []}
+					/>
+					<TextInput
+						label='Username'
+						disabled={displayOnly || mutate.isPending}
+						key={form.key('username')}
+						{...form.getInputProps('username')}
+					/>
+					<PasswordInput
+						label='Password'
+						disabled={displayOnly || mutate.isPending}
+						key={form.key('password')}
+						{...form.getInputProps('password')}
+					/>
+				</Stack>
 				{displayOnly ? null : (
 					<Button
 						type='submit'

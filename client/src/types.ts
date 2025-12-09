@@ -30,3 +30,10 @@ export type ProfileEdit = {
 	updated_at: string;
 	status: string;
 };
+
+export type DivisionEdit = {
+	id: number;
+	division_name: string;
+	division_code: string;
+	status: string;
+};
