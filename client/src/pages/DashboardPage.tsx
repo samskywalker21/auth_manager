@@ -1,12 +1,15 @@
 import { AppShell, Box, Flex, NavLink } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Outlet } from '@tanstack/react-router';
 import HeaderWithLogo from '../components/dashboard/HeaderWithLogo';
 import HeaderUser from '../components/dashboard/HeaderUser';
 import NavBarMenus from '../components/dashboard/NavBarMenus';
-import { DoorOpen } from 'lucide-react';
 import usePostLogout from '../hooks/usePostLogout';
+import { DoorOpen } from 'lucide-react';
 
 const DashboardPage = () => {
+	const [opened, { toggle }] = useDisclosure();
+
 	const logout = usePostLogout();
 
 	const handleLogOut = () => {
@@ -20,7 +23,7 @@ const DashboardPage = () => {
 				navbar={{
 					width: '250px',
 					breakpoint: 'sm',
-					collapsed: { desktop: false, mobile: true },
+					collapsed: { desktop: false, mobile: !opened },
 				}}
 			>
 				<AppShell.Header>
@@ -29,7 +32,10 @@ const DashboardPage = () => {
 						py={'sm'}
 					>
 						<AppShell.Section>
-							<HeaderWithLogo />
+							<HeaderWithLogo
+								toggle={toggle}
+								opened={opened}
+							/>
 						</AppShell.Section>
 						<AppShell.Section grow>
 							<HeaderUser />

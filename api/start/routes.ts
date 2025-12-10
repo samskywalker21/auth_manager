@@ -21,6 +21,7 @@ router
       .group(() => {
         router.get('all', [DivisionController, 'getAllDivisions'])
         router.get('active', [DivisionController, 'getActiveDivisions'])
+        router.get('page', [DivisionController, 'getDivisionsPaginated'])
         router.get(':id', [DivisionController, 'getDivisionById'])
         router.post('insert', [DivisionController, 'insertDivision'])
         router.patch('update/:id', [DivisionController, 'updateDivision'])
@@ -31,6 +32,7 @@ router
     router
       .group(() => {
         router.get('all', [SectionController, 'getAllSections'])
+        router.get('page', [SectionController, 'getSectionsPaginated'])
         router.get(':id', [SectionController, 'getSectionById'])
         router.post('insert', [SectionController, 'insertSection'])
         router.patch('update/:id', [SectionController, 'updateSection'])

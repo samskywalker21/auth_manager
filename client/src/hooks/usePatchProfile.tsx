@@ -22,13 +22,15 @@ const usePatchProfile = (id: number) => {
 				title: 'Success!',
 				message: 'Profile has been updated.',
 			});
+			mutate.reset();
 		},
-		onError() {
+		onError(error) {
 			notifications.show({
 				title: 'Oops!',
-				message: 'Something went wrong.',
+				message: `Something went wrong. ${error}`,
 				color: 'red',
 			});
+			mutate.reset();
 		},
 	});
 

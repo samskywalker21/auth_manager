@@ -1,11 +1,13 @@
 import { Button, Group, Select, Stack, TextInput } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
-import useGetDivision from '../../hooks/useGetDivision';
 import { modals } from '@mantine/modals';
+import useGetDivision from '../../hooks/useGetDivision';
+import usePatchDivision from '../../hooks/usePatchDivision';
 
-const DivisionForm = ({ id }: { id?: number }) => {
-	const query = useGetDivision(id ?? 0);
+const DivisionForm = ({ id }: { id: number }) => {
+	const query = useGetDivision(id);
+	const mutation = usePatchDivision(id);
 
 	const form = useForm({
 		mode: 'controlled',
@@ -28,9 +30,15 @@ const DivisionForm = ({ id }: { id?: number }) => {
 		}
 	}, [query.data]);
 
+	const handleEdit = (values: typeof form.values) => {
+		values.division_code = values.division_code.toUpperCase();
+		mutation.mutate(values);
+		modals.closeAll();
+	};
+
 	return (
 		<>
-			<form onSubmit={form.onSubmit((value) => console.log(value))}>
+			<form onSubmit={form.onSubmit(handleEdit)}>
 				<Stack gap={'md'}>
 					<TextInput
 						label='ID'
@@ -53,9 +61,10 @@ const DivisionForm = ({ id }: { id?: number }) => {
 					<Select
 						label='Status'
 						data={[
-							{ value: 'A', label: 'Active' },
-							{ value: 'I', label: 'Inactive' },
+							{ value: 'A', label: 'ACTIVE' },
+							{ value: 'I', label: 'INACTIVE' },
 						]}
+						checkIconPosition='right'
 						disabled={query.isFetching || query.isError ? true : false}
 						key={form.key('status')}
 						{...form.getInputProps('status')}

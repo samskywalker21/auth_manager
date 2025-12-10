@@ -17,6 +17,27 @@ export default class DivisionsController {
     return res
   }
 
+  async getDivisionsPaginated({ request }: HttpContext) {
+    const page = request.input('page', 1)
+    const searchString = request.input('search', '').trim()
+    const limit = 10
+    const query = Division.query()
+
+    if (searchString) {
+      await query
+        .whereRaw(`division_name LIKE ?`, [`%${searchString}%`])
+        .orWhereRaw(`division_code LIKE ?`, [`%${searchString}%`])
+    }
+
+    let res = await query.paginate(page, limit)
+
+    if (page > res.lastPage && res.lastPage > 0) {
+      res = await query.paginate(1, limit)
+    }
+
+    return res
+  }
+
   async getDivisionById({ request }: HttpContext) {
     await request.validateUsing(findDivisionByIdValidator)
     const res = await Division.findOrFail(request.param('id'))
@@ -32,7 +53,7 @@ export default class DivisionsController {
 
   async updateDivision({ request }: HttpContext) {
     await request.validateUsing(updateDivisionValidator)
-    const division = await Division.findOrFail(request.param('1'))
+    const division = await Division.findOrFail(request.param('id'))
     const res = await division.merge(request.body()).save()
     return res
   }

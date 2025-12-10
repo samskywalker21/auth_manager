@@ -1,14 +1,26 @@
-import { Flex, Image, Title, Text } from '@mantine/core';
+import { Flex, Image, Title, Text, Burger } from '@mantine/core';
 import dohLogo from '../../assets/doh-logo.png';
 import regionLogo from '../../assets/region-logo.png';
 
-const HeaderWithLogo = () => {
+const HeaderWithLogo = ({
+	toggle,
+	opened,
+}: {
+	toggle: () => void;
+	opened: boolean;
+}) => {
 	return (
 		<Flex
 			h={'100%'}
 			gap={10}
 			pl={'md'}
 		>
+			<Burger
+				py={'25px'}
+				hiddenFrom='md'
+				opened={opened}
+				onClick={toggle}
+			/>
 			<Flex gap={2}>
 				<Image
 					src={dohLogo}

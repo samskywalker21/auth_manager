@@ -1,19 +1,25 @@
-import { useState } from 'react';
-import { Title, Flex, Box, Container } from '@mantine/core';
+import { Title, Flex, Container, Button, Group } from '@mantine/core';
+import { modals } from '@mantine/modals';
+import { Plus, Search } from 'lucide-react';
 import DivisionsTable from '../components/divisions/DivisionsTable';
-import DivisionForm from '../components/divisions/DivisionForm';
-const DivisionsPage = () => {
-	const [dataId, setDataId] = useState(0);
+import DivisionInsertForm from '../components/divisions/DivisionInsertForm';
 
-	const handleEditClick = (id: number) => {
-		setDataId(id);
+const DivisionsPage = () => {
+	const handleAddButton = () => {
+		const addDivisionModal = modals.open({
+			withCloseButton: false,
+			closeOnClickOutside: false,
+			closeOnEscape: false,
+			title: 'Add Division',
+			children: <DivisionInsertForm />,
+		});
 	};
 
 	return (
 		<Container fluid>
 			<Title order={2}>Divisions</Title>
 			<Flex
-				direction={'row'}
+				direction={'column'}
 				gap={'md'}
 				justify={'flex-start'}
 				align={'flex-start'}

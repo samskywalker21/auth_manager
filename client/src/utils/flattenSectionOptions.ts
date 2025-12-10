@@ -2,7 +2,7 @@ import type { SectionOptions } from '../types';
 
 const flattenSectionOptions = (sections: SectionOptions[]) => {
 	const flattenedSections = sections.map((data) => ({
-		value: String(data.section_id),
+		value: String(data.id),
 		label: data.section_name,
 		division: data.division_id,
 	}));

@@ -88,9 +88,7 @@ const RegisterForm = () => {
 					{...form.getInputProps('section_id')}
 					nothingFoundMessage='No sections found.'
 					data={sectionOptions ?? []}
-					clearable
 					searchable
-					allowDeselect
 					checkIconPosition='right'
 					disabled={mutation.isPending ? true : false}
 				/>

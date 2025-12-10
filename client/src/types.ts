@@ -1,8 +1,17 @@
 export type SectionOptions = {
-	section_id: number;
+	id: number;
 	section_name: string;
 	section_code: string;
 	division_id: number;
+	division_name: string;
+	division_code: string;
+};
+
+export type SectionData = {
+	id: number;
+	section_name: string;
+	section_code: string;
+	status: string;
 	division_name: string;
 	division_code: string;
 };
@@ -31,8 +40,20 @@ export type ProfileEdit = {
 	status: string;
 };
 
-export type DivisionEdit = {
+export type DivisionData = {
 	id: number;
+	division_name: string;
+	division_code: string;
+	status: string;
+};
+
+export type DivisionInsert = {
+	division_name: string;
+	division_code: string;
+	status?: string;
+};
+
+export type DivisionEdit = {
 	division_name: string;
 	division_code: string;
 	status: string;
