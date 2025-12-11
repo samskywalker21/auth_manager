@@ -5,11 +5,37 @@ import {
   updateProfileValidator,
 } from '#validators/profile'
 import type { HttpContext } from '@adonisjs/core/http'
+import { flatten } from 'flat'
 
 export default class ProfilesController {
   async getAllProfiles() {
     const res = await Profile.all()
     return res
+  }
+
+  async getProfilesPaginated({ request }: HttpContext) {
+    const page = request.input('page', 1)
+    const limit = request.input('limit', 10)
+    const search = request.input('search', '').trim()
+    const query = Profile.query()
+
+    if (search) {
+      await query
+        .whereRaw('first_name LIKE ?', [`%${search}%`])
+        .orWhereRaw('middle_name LIKE ?', [`%${search}%`])
+        .orWhereRaw('last_name LIKE ?', [`%${search}%`])
+        .orWhereRaw('username LIKE ?', [`%${search}%`])
+    }
+
+    const raw = await query.paginate(page, limit)
+    const { meta, data } = raw.toJSON()
+    const res = data.map((row) => {
+      const { section, ...profile } = row.toJSON()
+      const { division, ...chunk } = section
+      return { ...division, ...chunk, ...profile }
+    })
+
+    return { meta, data: res }
   }
 
   async getActiveProfiles() {

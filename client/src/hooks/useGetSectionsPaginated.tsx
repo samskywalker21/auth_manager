@@ -1,7 +1,11 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-const useGetSectionsPaginated = (page?: number, search?: string) => {
+const useGetSectionsPaginated = (
+	page?: number,
+	search?: string,
+	limit?: number,
+) => {
 	const query = useQuery({
 		queryKey: ['sections', page, search],
 		queryFn: async () => {
@@ -10,7 +14,10 @@ const useGetSectionsPaginated = (page?: number, search?: string) => {
 				queryParams = queryParams + `page=${page}&`;
 			}
 			if (search) {
-				queryParams = queryParams + `search=${search}`;
+				queryParams = queryParams + `search=${search}&`;
+			}
+			if (limit) {
+				queryParams = queryParams + `limit=${limit}&`;
 			}
 			return axios.get(
 				`${import.meta.env.VITE_API_URL}/section/page${queryParams}`,

@@ -1,6 +1,6 @@
 import { Button, Group, Select, Stack, TextInput } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
-import { useForm } from '@mantine/form';
+import { useForm, isNotEmpty, hasLength } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import useGetDivision from '../../hooks/useGetDivision';
 import usePatchDivision from '../../hooks/usePatchDivision';
@@ -16,6 +16,11 @@ const DivisionForm = ({ id }: { id: number }) => {
 			division_name: '',
 			division_code: '',
 			status: '',
+		},
+		validate: {
+			division_name: isNotEmpty() && hasLength({ min: 3 }),
+			division_code: isNotEmpty() && hasLength({ min: 3, max: 5 }),
+			status: isNotEmpty() && hasLength({ min: 1 }),
 		},
 	});
 
@@ -42,7 +47,7 @@ const DivisionForm = ({ id }: { id: number }) => {
 				<Stack gap={'md'}>
 					<TextInput
 						label='ID'
-						disabled={query.isFetching || query.isError ? true : false}
+						disabled={true}
 						key={form.key('id')}
 						{...form.getInputProps('id')}
 					/>

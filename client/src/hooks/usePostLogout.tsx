@@ -26,10 +26,10 @@ const usePostLogout = () => {
 			});
 			navigate({ to: '/' });
 		},
-		onError: () => {
+		onError: (error) => {
 			notifications.show({
-				title: 'Opppsss!',
-				message: 'Something went wrong.',
+				title: 'Error!',
+				message: `Something went wrong. ${error}`,
 				color: 'red',
 			});
 		},

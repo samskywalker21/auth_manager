@@ -39,7 +39,6 @@ const DivisionsTable = () => {
 
 	const divisionRows = division?.data?.data.data.map((row: DivisionData) => (
 		<Table.Tr key={row.id + row.division_code}>
-			<Table.Td>{row.id}</Table.Td>
 			<Table.Td>{row.division_name}</Table.Td>
 			<Table.Td>{row.division_code}</Table.Td>
 			<Table.Td>
@@ -79,7 +78,6 @@ const DivisionsTable = () => {
 				>
 					<Table.Thead>
 						<Table.Tr>
-							<Table.Th>ID</Table.Th>
 							<Table.Th>Division</Table.Th>
 							<Table.Th>Code</Table.Th>
 							<Table.Th>Status</Table.Th>

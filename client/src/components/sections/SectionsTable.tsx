@@ -5,6 +5,8 @@ import useGetSectionsPaginated from '../../hooks/useGetSectionsPaginated';
 import SectionTableControls from './SectionTableControls';
 import type { SectionData } from '../../types';
 import { Pencil } from 'lucide-react';
+import { modals } from '@mantine/modals';
+import SectionEditForm from './SectionEditForm';
 
 const SectionsTable = () => {
 	const [page, setPage] = useState(1);
@@ -12,12 +14,18 @@ const SectionsTable = () => {
 	const [debounce] = useDebouncedValue(search, 200);
 	const sections = useGetSectionsPaginated(page, debounce);
 
-	console.table(sections.data?.data.data);
+	const editSectionModal = (id: number) => {
+		modals.open({
+			title: 'Edit Section',
+			children: <SectionEditForm id={id} />,
+			closeOnClickOutside: false,
+			withCloseButton: false,
+		});
+	};
 
 	const sectionList = sections.data?.data.data.map((row: SectionData) => {
 		return (
-			<Table.Tr>
-				<Table.Td>{row.id}</Table.Td>
+			<Table.Tr key={row.id + row.section_code}>
 				<Table.Td>{row.section_name}</Table.Td>
 				<Table.Td>{row.section_code}</Table.Td>
 				<Table.Td>{row.division_name}</Table.Td>
@@ -31,7 +39,10 @@ const SectionsTable = () => {
 					</Badge>
 				</Table.Td>
 				<Table.Td>
-					<ActionIcon variant='subtle'>
+					<ActionIcon
+						variant='subtle'
+						onClick={() => editSectionModal(row.id)}
+					>
 						<Pencil size={'1rem'} />
 					</ActionIcon>
 				</Table.Td>
@@ -65,8 +76,7 @@ const SectionsTable = () => {
 				>
 					<Table.Thead>
 						<Table.Tr>
-							<Table.Th>ID</Table.Th>
-							<Table.Th>Section Name</Table.Th>
+							<Table.Th>Section</Table.Th>
 							<Table.Th>Section Code</Table.Th>
 							<Table.Th visibleFrom='md'>Division</Table.Th>
 							<Table.Th visibleFrom='md'>Division Code</Table.Th>

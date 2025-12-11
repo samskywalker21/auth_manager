@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary().unsigned()
       table.string('section_name', 100).notNullable()
       table.string('section_code', 5).notNullable()
-      table.enum('status', ['A', 'B']).defaultTo('A').notNullable()
+      table.enum('status', ['A', 'I']).defaultTo('A').notNullable()
       table
         .integer('division_id')
         .unsigned()

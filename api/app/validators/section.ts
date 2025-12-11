@@ -12,7 +12,7 @@ export const insertSectionValidator = vine.compile(
   vine.object({
     section_name: vine.string().trim().minLength(1),
     section_code: vine.string().trim().minLength(1).maxLength(5),
-    division_code: vine.number(),
+    division_id: vine.number(),
     status: vine.enum(['A', 'I']).optional(),
   })
 )

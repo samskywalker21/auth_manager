@@ -21,8 +21,8 @@ const usePostRegister = () => {
 		onError: (error) => {
 			notifications.show({
 				title: 'Error!',
+				message: `Something went wrong. ${error}`,
 				color: 'red',
-				message: error.message,
 			});
 		},
 	});

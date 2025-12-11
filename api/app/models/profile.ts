@@ -1,11 +1,12 @@
 import { DateTime } from 'luxon'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeFetch, beforeFind, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import hash from '@adonisjs/core/services/hash'
 import Section from './section.js'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import type { ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['username'],
@@ -61,4 +62,10 @@ export default class Profile extends compose(BaseModel, AuthFinder) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: 'updated_at' })
   declare updatedAt: DateTime
+
+  @beforeFind()
+  @beforeFetch()
+  static includeSection(query: ModelQueryBuilderContract<typeof Profile>) {
+    query.preload('section')
+  }
 }

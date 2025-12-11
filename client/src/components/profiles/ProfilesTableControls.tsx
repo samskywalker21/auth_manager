@@ -1,9 +1,8 @@
 import { Group, Button, TextInput, Pagination, Flex } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { Plus, Search } from 'lucide-react';
-import DivisionInsertForm from './DivisionInsertForm';
 
-const DivisionTableControls = ({
+const ProfilesTableControls = ({
 	searchHandler,
 	paginationHandler,
 	totalPages,
@@ -12,15 +11,6 @@ const DivisionTableControls = ({
 	paginationHandler: (value: number) => void;
 	totalPages: number;
 }) => {
-	const addDivisionHandler = () => {
-		modals.open({
-			title: 'Add Division',
-			children: <DivisionInsertForm />,
-			withCloseButton: false,
-			closeOnClickOutside: false,
-		});
-	};
-
 	return (
 		<Group
 			w={'100%'}
@@ -30,10 +20,7 @@ const DivisionTableControls = ({
 				w={'100%'}
 				gap={5}
 			>
-				<Button
-					variant='subtle'
-					onClick={addDivisionHandler}
-				>
+				<Button variant='subtle'>
 					ADD{' '}
 					<Plus
 						size={'1rem'}
@@ -43,9 +30,9 @@ const DivisionTableControls = ({
 				<TextInput
 					placeholder='Search...'
 					rightSection={<Search size={'1rem'} />}
-					onChange={searchHandler}
 					w={'50%'}
 					miw={'250px'}
+					onChange={searchHandler}
 				/>
 			</Flex>
 			<Flex
@@ -64,4 +51,4 @@ const DivisionTableControls = ({
 	);
 };
 
-export default DivisionTableControls;
+export default ProfilesTableControls;

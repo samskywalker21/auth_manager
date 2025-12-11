@@ -20,7 +20,7 @@ export default class DivisionsController {
   async getDivisionsPaginated({ request }: HttpContext) {
     const page = request.input('page', 1)
     const searchString = request.input('search', '').trim()
-    const limit = 10
+    const limit = request.input('limit', 10)
     const query = Division.query()
 
     if (searchString) {

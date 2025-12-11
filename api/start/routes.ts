@@ -43,6 +43,7 @@ router
       .group(() => {
         router.get('all', [ProfileController, 'getAllProfiles'])
         router.get('active', [ProfileController, 'getActiveProfiles'])
+        router.get('page', [ProfileController, 'getProfilesPaginated'])
         router.get(':id', [ProfileController, 'getProfileById'])
         router.post('insert', [ProfileController, 'insertProfile'])
         router.patch('update/:id', [ProfileController, 'updateProfile'])

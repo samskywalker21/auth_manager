@@ -14,11 +14,9 @@ const DivisionInsertForm = () => {
 			status: 'A',
 		},
 		validate: {
-			division_name: isNotEmpty(),
-			division_code: isNotEmpty() && hasLength({ max: 5 }),
-			status: (value) => {
-				if (value !== 'A' && value !== 'I') return null;
-			},
+			division_name: isNotEmpty() && hasLength({ min: 3 }),
+			division_code: isNotEmpty() && hasLength({ min: 3, max: 5 }),
+			status: isNotEmpty() && hasLength({ min: 1 }),
 		},
 	});
 
@@ -29,6 +27,7 @@ const DivisionInsertForm = () => {
 	const handleSubmit = (values: typeof form.values) => {
 		values.division_code = values.division_code.toUpperCase();
 		mutation.mutate(values);
+		form.reset();
 		closeModal();
 	};
 

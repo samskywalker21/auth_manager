@@ -1,10 +1,11 @@
 import { Container, Flex, Title } from '@mantine/core';
-import SectionsTable from '../components/sections/SectionsTable';
 
-const SectionsPage = () => {
+import ProfilesTable from '../components/profiles/ProfilesTable';
+
+const ProfilesPage = () => {
 	return (
 		<Container fluid>
-			<Title order={3}>SECTIONS</Title>
+			<Title order={3}>PROFILES</Title>
 			<Flex
 				direction={'column'}
 				gap={'md'}
@@ -13,10 +14,10 @@ const SectionsPage = () => {
 				pt={'1rem'}
 				wrap={{ base: 'wrap', md: 'nowrap' }}
 			>
-				<SectionsTable />
+				<ProfilesTable />
 			</Flex>
 		</Container>
 	);
 };
 
-export default SectionsPage;
+export default ProfilesPage;

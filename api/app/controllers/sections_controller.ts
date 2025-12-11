@@ -27,13 +27,18 @@ export default class SectionsController {
   async getSectionsPaginated({ request }: HttpContext) {
     const page = request.input('page', 1)
     const searchString = request.input('search', '').trim()
-    const limit = 10
+    const limit = request.input('limit', 10)
     const query = Section.query()
 
     if (searchString) {
       await query
-        .whereRaw('section_name LIKE ?', [`%${searchString}`])
-        .orWhereRaw('section_code LIKE ?', [`%${searchString}`])
+        .whereRaw('section_name LIKE ?', [`%${searchString}%`])
+        .orWhereRaw('section_code LIKE ?', [`%${searchString}%`])
+        .orWhereHas('division', (subquery) => {
+          subquery
+            .whereRaw('division_name LIKE ?', [`%${searchString}%`])
+            .orWhereRaw('division_code LIKE ?', [`%${searchString}%`])
+        })
     }
 
     let sectionPaged = await query.paginate(page, limit)
@@ -44,10 +49,8 @@ export default class SectionsController {
 
     const { meta, data } = sectionPaged.toJSON()
     const flatSection = data.map((row) => {
-      const sectionObject = row.toJSON()
-      const { division, ...rest } = sectionObject
-      const flatDivision = flatten(division, { safe: true }) as Record<string, any>
-      return { ...flatDivision, ...rest }
+      const { division, ...section } = row.toJSON()
+      return { ...division, ...section }
     })
 
     const res = { meta, data: flatSection }
