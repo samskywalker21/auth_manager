@@ -1,9 +1,11 @@
 import { notifications } from '@mantine/notifications';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import type { RegistrationData } from '../types';
 
 const usePostRegister = () => {
+	const queryClient = useQueryClient();
+
 	const mutation = useMutation({
 		mutationFn: async (registration: RegistrationData) => {
 			return axios.post(
@@ -12,6 +14,7 @@ const usePostRegister = () => {
 			);
 		},
 		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['profiles'] });
 			notifications.show({
 				title: 'Success!',
 				message:

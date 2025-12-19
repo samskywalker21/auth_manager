@@ -39,6 +39,8 @@ export type RegistrationData = {
 	section_id: number;
 	username: string;
 	password: string;
+	status?: string;
+	is_admin?: boolean;
 };
 
 export type ProfileEdit = {

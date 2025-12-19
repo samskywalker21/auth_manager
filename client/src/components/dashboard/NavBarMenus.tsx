@@ -5,6 +5,7 @@ import useIsUserAdmin from '../../hooks/useIsUserAdmin';
 
 const NavBarMenus = () => {
 	const is_admin = useIsUserAdmin();
+	console.log(is_admin.data?.data);
 
 	return (
 		<>
@@ -15,7 +16,7 @@ const NavBarMenus = () => {
 				activeOptions={{ exact: true }}
 				to='/dashboard'
 			/>
-			{is_admin ? (
+			{is_admin.data?.data === 1 ? (
 				<NavLink
 					label='Administrator'
 					leftSection={<ShieldUser size={'1rem'} />}

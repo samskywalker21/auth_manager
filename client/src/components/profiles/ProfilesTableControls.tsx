@@ -1,6 +1,7 @@
 import { Group, Button, TextInput, Pagination, Flex } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { Plus, Search } from 'lucide-react';
+import ProfileInsertForm from './ProfileInsertForm';
 
 const ProfilesTableControls = ({
 	searchHandler,
@@ -11,6 +12,17 @@ const ProfilesTableControls = ({
 	paginationHandler: (value: number) => void;
 	totalPages: number;
 }) => {
+	const addProfileHandler = () => {
+		modals.open({
+			size: 'lg',
+			title: 'Add Profile',
+			children: <ProfileInsertForm />,
+			withCloseButton: false,
+			closeOnClickOutside: false,
+			closeOnEscape: false,
+		});
+	};
+
 	return (
 		<Group
 			w={'100%'}
@@ -20,7 +32,10 @@ const ProfilesTableControls = ({
 				w={'100%'}
 				gap={5}
 			>
-				<Button variant='subtle'>
+				<Button
+					variant='subtle'
+					onClick={addProfileHandler}
+				>
 					ADD{' '}
 					<Plus
 						size={'1rem'}
