@@ -5,7 +5,6 @@ import useIsUserAdmin from '../../hooks/useIsUserAdmin';
 
 const NavBarMenus = () => {
 	const is_admin = useIsUserAdmin();
-	console.log(is_admin.data?.data);
 
 	return (
 		<>

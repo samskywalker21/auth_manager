@@ -1,23 +1,27 @@
-import { Flex, Container, Title } from '@mantine/core';
+import { Flex, Container, Title, Box } from '@mantine/core';
 import useGetProfile from '../hooks/useGetProfile';
-import ProfileEditForm from '../components/general/ProfileEditForm';
+import ProfileBasicInfo from '../components/home/ProfileBasicInfo';
 
 const HomePage = () => {
 	const query = useGetProfile();
 
 	return (
 		<Container fluid>
-			<Title order={2}>Your Profile</Title>
+			<Title order={2}>Welcome, {query.data?.data.first_name ?? ''}</Title>
 			<Flex
-				w={'35vw'}
-				direction='column'
+				direction={'column'}
 				gap={'md'}
-				pr={'10rem'}
+				justify={'flex-start'}
+				align={'flex-start'}
 				pt={'1rem'}
-				miw={'450px'}
+				wrap={{ base: 'wrap', md: 'nowrap' }}
 			>
 				{query.isPending && 'Waiting'}
-				{query.isSuccess && <ProfileEditForm profile={query.data?.data} />}
+				{query.isFetched && (
+					<Box w={'100%'}>
+						<ProfileBasicInfo data={query.data?.data} />
+					</Box>
+				)}
 			</Flex>
 		</Container>
 	);

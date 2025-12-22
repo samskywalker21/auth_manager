@@ -21,12 +21,13 @@ const usePostRegister = () => {
 					'Registration successful. Please contact ICTU for activation of account',
 			});
 		},
-		onError: (error) => {
+		onError: (error, context) => {
 			notifications.show({
 				title: 'Error!',
-				message: `Something went wrong. ${error}`,
+				message: `Something went wrong. ${error.message}`,
 				color: 'red',
 			});
+			console.log(context);
 		},
 	});
 

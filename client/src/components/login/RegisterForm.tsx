@@ -24,9 +24,9 @@ const RegisterForm = () => {
 			password: '',
 		},
 		validate: {
-			first_name: hasLength({ min: 3 }),
-			last_name: hasLength({ min: 3 }),
-			position: hasLength({ min: 3 }),
+			first_name: hasLength({ min: 2 }),
+			last_name: hasLength({ min: 2 }),
+			position: hasLength({ min: 2 }),
 			section_id: (value) => (value !== '0' ? null : null),
 			username: hasLength({ min: 3 }),
 			password: hasLength({ min: 8 }),

@@ -1,4 +1,12 @@
-import { Stack, TextInput, Select, Button, Group } from '@mantine/core';
+import {
+	Stack,
+	TextInput,
+	Select,
+	Button,
+	Group,
+	Paper,
+	Text,
+} from '@mantine/core';
 import { useForm, isNotEmpty, hasLength } from '@mantine/form';
 import useGetSection from '../../hooks/useGetSection';
 import { modals } from '@mantine/modals';
@@ -54,6 +62,13 @@ const SectionEditForm = ({ id }: { id: number }) => {
 	return (
 		<form onSubmit={form.onSubmit(editSectionHandler)}>
 			<Stack>
+				<Paper
+					radius='md'
+					p='sm'
+					bg='green'
+				>
+					<Text fw={'bold'}>Edit Section</Text>
+				</Paper>
 				<TextInput
 					label='ID'
 					disabled

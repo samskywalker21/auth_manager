@@ -14,7 +14,6 @@ const DivisionTableControls = ({
 }) => {
 	const addDivisionHandler = () => {
 		modals.open({
-			title: 'Add Division',
 			children: <DivisionInsertForm />,
 			withCloseButton: false,
 			closeOnClickOutside: false,

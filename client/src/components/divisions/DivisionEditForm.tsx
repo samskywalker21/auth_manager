@@ -1,4 +1,12 @@
-import { Button, Group, Select, Stack, TextInput } from '@mantine/core';
+import {
+	Button,
+	Group,
+	Paper,
+	Select,
+	Stack,
+	Text,
+	TextInput,
+} from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { useForm, isNotEmpty, hasLength } from '@mantine/form';
 import { modals } from '@mantine/modals';
@@ -45,6 +53,13 @@ const DivisionForm = ({ id }: { id: number }) => {
 		<>
 			<form onSubmit={form.onSubmit(handleEdit)}>
 				<Stack gap={'md'}>
+					<Paper
+						radius='md'
+						p='sm'
+						bg='green'
+					>
+						<Text fw={'bold'}>Edit Division</Text>
+					</Paper>
 					<TextInput
 						label='ID'
 						disabled={true}

@@ -8,7 +8,7 @@ import {
 	TextInput,
 } from '@mantine/core';
 import type { ProfileEdit } from '../../types';
-import { useForm } from '@mantine/form';
+import { useForm, isNotEmpty, hasLength } from '@mantine/form';
 import useGetSectionOptions from '../../hooks/useGetSectionOptions';
 import flattenSectionOptions from '../../utils/flattenSectionOptions';
 import usePatchProfile from '../../hooks/usePatchProfile';
@@ -29,56 +29,23 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 			middle_name: profile.middle_name || '',
 			last_name: profile.last_name || '',
 			position: profile.position || '',
-			section_id: String(profile.section_id) || '0',
+			section_id: `${profile.section_id}` || '',
 			username: profile.username || '',
 			password: '',
-			is_admin: profile.is_admin || false,
+			confirm_password: '',
 		},
 		validate: {
-			first_name: (value) => {
-				return value !== profile.first_name
-					? value.length < 3
-						? true
-						: null
-					: null;
-			},
-			middle_name: (value) => {
-				if (form.isDirty('middle_name')) {
-					return value !== profile.middle_name
-						? value.length < 3
-							? true
-							: null
-						: null;
-				}
-			},
-			last_name: (value) => {
-				return value !== profile.last_name
-					? value.length < 3
-						? true
-						: null
-					: null;
-			},
-			position: (value) => {
-				return value !== profile.position
-					? value.length < 3
-						? true
-						: null
-					: null;
-			},
-			section_id: (value) => {
-				return value === '0' ? true : null;
-			},
-			username: (value) => {
-				return value !== profile.username
-					? value.length < 3
-						? true
-						: null
-					: null;
-			},
+			first_name: isNotEmpty() && hasLength({ min: 2 }),
+			last_name: isNotEmpty() && hasLength({ min: 2 }),
+			position: isNotEmpty() && hasLength({ min: 2 }),
+			section_id: isNotEmpty() && hasLength({ min: 1, max: 1 }),
+			username: isNotEmpty() && hasLength({ min: 6 }),
 			password: (value) => {
-				if (form.isDirty('password')) {
-					return value.length < 3 ? true : null;
-				}
+				if (!value) return null;
+				return value.length < 6 ? null : null;
+			},
+			confirm_password: (value, values) => {
+				return value !== values.password ? 'Password does not match' : null;
 			},
 		},
 	});

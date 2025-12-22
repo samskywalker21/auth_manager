@@ -29,7 +29,6 @@ const DivisionsTable = () => {
 	const openModal = (id: number) => {
 		modals.open({
 			id: 'edit-division-form',
-			title: 'Edit Division',
 			withCloseButton: false,
 			closeOnClickOutside: false,
 			closeOnEscape: false,

@@ -1,4 +1,12 @@
-import { Button, Group, Select, Stack, TextInput } from '@mantine/core';
+import {
+	Button,
+	Group,
+	Paper,
+	Select,
+	Stack,
+	Text,
+	TextInput,
+} from '@mantine/core';
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import usePostDivision from '../../hooks/usePostDivision';
@@ -34,6 +42,13 @@ const DivisionInsertForm = () => {
 	return (
 		<form onSubmit={form.onSubmit(handleSubmit)}>
 			<Stack gap={'md'}>
+				<Paper
+					radius='md'
+					p='sm'
+					bg='green'
+				>
+					<Text fw={'bold'}>Add Division</Text>
+				</Paper>
 				<TextInput
 					label='Division Name'
 					key={form.key('division_name')}

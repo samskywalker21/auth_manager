@@ -1,4 +1,12 @@
-import { Stack, TextInput, Select, Group, Button } from '@mantine/core';
+import {
+	Stack,
+	TextInput,
+	Select,
+	Group,
+	Button,
+	Paper,
+	Text,
+} from '@mantine/core';
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import useGetDivisions from '../../hooks/useGetDivisions';
@@ -41,6 +49,13 @@ const SectionInsertForm = () => {
 	return (
 		<form onSubmit={form.onSubmit(onSubmitHandler)}>
 			<Stack>
+				<Paper
+					radius='md'
+					p='sm'
+					bg='green'
+				>
+					<Text fw={'bold'}>Add Section</Text>
+				</Paper>
 				<TextInput
 					label='Section Name'
 					key={form.key('section_name')}

@@ -14,7 +14,6 @@ const SectionTableControls = ({
 }) => {
 	const addSectionHandler = () => {
 		modals.open({
-			title: 'Add Section',
 			children: <SectionInsertForm />,
 			withCloseButton: false,
 			closeOnClickOutside: false,

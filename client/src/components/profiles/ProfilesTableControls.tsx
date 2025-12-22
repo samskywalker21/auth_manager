@@ -15,7 +15,6 @@ const ProfilesTableControls = ({
 	const addProfileHandler = () => {
 		modals.open({
 			size: 'lg',
-			title: 'Add Profile',
 			children: <ProfileInsertForm />,
 			withCloseButton: false,
 			closeOnClickOutside: false,

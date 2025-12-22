@@ -16,7 +16,6 @@ const SectionsTable = () => {
 
 	const editSectionModal = (id: number) => {
 		modals.open({
-			title: 'Edit Section',
 			children: <SectionEditForm id={id} />,
 			closeOnClickOutside: false,
 			withCloseButton: false,

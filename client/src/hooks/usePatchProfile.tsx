@@ -1,9 +1,11 @@
 import { notifications } from '@mantine/notifications';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import type { ProfileEdit } from '../types';
 
 const usePatchProfile = (id: number) => {
+	const queryClient = useQueryClient();
+
 	const mutate = useMutation({
 		mutationKey: ['profile', id],
 		mutationFn: async (profile: Partial<ProfileEdit>) => {
@@ -18,6 +20,7 @@ const usePatchProfile = (id: number) => {
 			);
 		},
 		onSuccess() {
+			queryClient.invalidateQueries({ queryKey: ['profiles'] });
 			notifications.show({
 				title: 'Success!',
 				message: 'Profile has been updated.',
