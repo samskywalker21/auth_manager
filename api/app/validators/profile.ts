@@ -38,3 +38,13 @@ export const updateProfileValidator = vine.compile(
     }),
   })
 )
+
+export const changePasswordValidator = vine.compile(
+  vine.object({
+    old_password: vine.string().trim().minLength(1).maxLength(30),
+    password: vine.string().trim().minLength(1).maxLength(30),
+    params: vine.object({
+      id: vine.number(),
+    }),
+  })
+)

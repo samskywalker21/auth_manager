@@ -1,6 +1,7 @@
 import { Flex, Container, Title, Box } from '@mantine/core';
 import useGetProfile from '../hooks/useGetProfile';
 import ProfileBasicInfo from '../components/home/ProfileBasicInfo';
+import ProfileCredentials from '../components/home/ProfileCredentials';
 
 const HomePage = () => {
 	const query = useGetProfile();
@@ -18,9 +19,14 @@ const HomePage = () => {
 			>
 				{query.isPending && 'Waiting'}
 				{query.isFetched && (
-					<Box w={'100%'}>
-						<ProfileBasicInfo data={query.data?.data} />
-					</Box>
+					<>
+						<Box w={'100%'}>
+							<ProfileBasicInfo data={query.data?.data} />
+						</Box>
+						<Box w={'100%'}>
+							<ProfileCredentials data={query.data?.data} />
+						</Box>
+					</>
 				)}
 			</Flex>
 		</Container>

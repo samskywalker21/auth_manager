@@ -46,6 +46,7 @@ router
         router.get('page', [ProfileController, 'getProfilesPaginated'])
         router.get(':id', [ProfileController, 'getProfileById'])
         router.post('insert', [ProfileController, 'insertProfile'])
+        router.patch('change_password/:id', [ProfileController, 'changePassword'])
         router.patch('update/:id', [ProfileController, 'updateProfile'])
         router.get('roles/:id', [RolesController, 'getUserRoles'])
         router.post('roles', [RolesController, 'insertUserRoles'])

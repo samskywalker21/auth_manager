@@ -1,11 +1,12 @@
 import Profile from '#models/profile'
 import {
+  changePasswordValidator,
   findProfileByIdValidator,
   insertProfileValidator,
   updateProfileValidator,
 } from '#validators/profile'
 import type { HttpContext } from '@adonisjs/core/http'
-import { flatten } from 'flat'
+import hash from '@adonisjs/core/services/hash'
 
 export default class ProfilesController {
   async getAllProfiles() {
@@ -54,6 +55,22 @@ export default class ProfilesController {
     const newProfile = await Profile.create(request.body())
     const res = await newProfile.save()
     return res
+  }
+
+  async changePassword({ request, response }: HttpContext) {
+    await request.validateUsing(changePasswordValidator)
+    const profile = await Profile.findOrFail(request.param('id'))
+    if (profile) {
+      if (await hash.verify(profile.password, request.body().old_password)) {
+        const res = profile.merge({ password: request.body().password }).save()
+        return res
+      } else {
+        response.safeStatus(500).json
+        return { message: 'Password does not match old' }
+      }
+    }
+    response.safeStatus(500).json
+    return { message: `No user found with ID: ${request.param('id')}` }
   }
 
   async updateProfile({ request }: HttpContext) {

@@ -103,10 +103,14 @@ const ProfileBasicInfo = ({ data }: { data: Partial<ProfileData> }) => {
 						{...form.getInputProps('section_id')}
 					/>
 				</Group>
-				<Group w={'50%'}>
+				<Group
+					w={'50%'}
+					miw={'200px'}
+				>
 					<Button
 						variant='subtle'
 						w={'25%'}
+						miw={'90px'}
 						type='submit'
 					>
 						EDIT
@@ -115,6 +119,7 @@ const ProfileBasicInfo = ({ data }: { data: Partial<ProfileData> }) => {
 						variant='subtle'
 						color='red'
 						w={'25%'}
+						miw={'90px'}
 						onClick={() => {
 							if (edit) {
 								toggleEdit();
