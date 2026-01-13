@@ -14,6 +14,7 @@ const SectionController = () => import('#controllers/sections_controller')
 const ProfileController = () => import('#controllers/profiles_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const AuthController = () => import('#controllers/auth_controller')
+const SystemsController = () => import('#controllers/systems_controller')
 
 router
   .group(() => {
@@ -39,6 +40,7 @@ router
       })
       .prefix('section')
       .use(middleware.auth({ guards: ['api'] }))
+
     router
       .group(() => {
         router.get('all', [ProfileController, 'getAllProfiles'])
@@ -48,12 +50,26 @@ router
         router.post('insert', [ProfileController, 'insertProfile'])
         router.patch('change_password/:id', [ProfileController, 'changePassword'])
         router.patch('update/:id', [ProfileController, 'updateProfile'])
-        router.get('roles/:id', [RolesController, 'getUserRoles'])
-        router.post('roles', [RolesController, 'insertUserRoles'])
-        router.patch('roles', [RolesController, 'updateUserRoles'])
+        router.post('roles/insert', [RolesController, 'insertRoleById'])
+        router.patch('roles/update', [RolesController, 'updateRoleById'])
+        router.delete('roles/delete', [RolesController, 'deleteRoleById'])
+        router.get('roles/:id', [RolesController, 'getRolesById'])
       })
       .prefix('profile')
       .use(middleware.auth({ guards: ['api'] }))
+
+    router
+      .group(() => {
+        router.get('all', [SystemsController, 'getSystems'])
+        router.get('paginated', [SystemsController, 'getSystemsPaginated'])
+        router.get('active', [SystemsController, 'getActiveSystems'])
+        router.get(':id', [SystemsController, 'getSystemById'])
+        router.post('insert', [SystemsController, 'insertSystem'])
+        router.patch('update/:id', [SystemsController, 'updateSystem'])
+      })
+      .prefix('system')
+      .use(middleware.auth({ guards: ['api'] }))
+
     router
       .group(() => {
         router.post('login', [AuthController, 'login'])
@@ -67,6 +83,7 @@ router
           .use(middleware.auth({ guards: ['api'] }))
       })
       .prefix('auth')
+
     router.post('register', [ProfileController, 'insertProfile'])
     router.get('register/sections', [SectionController, 'getActiveSections'])
   })

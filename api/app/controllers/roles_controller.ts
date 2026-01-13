@@ -1,26 +1,61 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Role from '#models/role'
-import { insertRolesValidator } from '#validators/role'
+import {
+  deleteRoleValidator,
+  getRolesByIdValidator,
+  insertRoleValidator,
+  updateRoleValidator,
+} from '#validators/role'
 
 export default class RolesController {
-  async getUserRoles({ request }: HttpContext) {
+  async getRolesById({ request }: HttpContext) {
+    await request.validateUsing(getRolesByIdValidator)
     const id = request.param('id')
-    const res = await Role.findManyBy({ id })
+    const data = await Role.findManyBy({ profileId: id })
+    const res = await data.map((row) => {
+      const rowData = row.toJSON()
+      const { system, ...role } = rowData
+      return {
+        ...role,
+        system_id: system.id,
+        system_status: system.status,
+        system_name: system.system_name,
+      }
+    })
     return res
   }
 
-  async insertUserRoles({ request }: HttpContext) {
-    await request.validateUsing(insertRolesValidator)
-    const roles = request.body().roles
-    const toInsert = await roles.map((row: { system: string; access: number }) => ({
-      profile_id: Number(request.body().profile),
-      system: row.system,
-      access: row.access,
-    }))
-
-    const res = await Role.createMany(toInsert)
+  async insertRoleById({ request }: HttpContext) {
+    await request.validateUsing(insertRoleValidator)
+    const body = request.body()
+    const roleExists = await Role.findByOrFail({
+      profile_id: body.profile_id,
+      system_id: body.system_id,
+    })
+    if (roleExists) {
+      return { message: 'User has this role already' }
+    }
+    const role = await Role.create(request.body())
+    const res = await role.save()
     return res
   }
 
-  async updateUserRoles() {}
+  async updateRoleById({ request }: HttpContext) {
+    await request.validateUsing(updateRoleValidator)
+    const { id, access } = request.body()
+    const role = await Role.findByOrFail(id)
+    const res = await role.merge(access).save()
+    return res
+  }
+
+  async deleteRoleById({ request }: HttpContext) {
+    await request.validateUsing(deleteRoleValidator)
+    const { id } = request.body()
+    const role = await Role.findByOrFail({ id })
+    if (!role) {
+      return { message: `No role found with ID: ${id}` }
+    }
+    const res = await role.delete()
+    return res
+  }
 }
