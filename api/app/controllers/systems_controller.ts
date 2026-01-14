@@ -50,7 +50,7 @@ export default class SystemsController {
     await request.validateUsing(updateSystem)
     const id = request.param('id')
     const data = request.body()
-    const system = await System.findByOrFail(id)
+    const system = await System.findOrFail(id)
     const newSystem = await system.merge(data)
     const res = await newSystem.save()
     return res

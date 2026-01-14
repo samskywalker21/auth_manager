@@ -91,3 +91,28 @@ export type DivisionEdit = {
 	division_code?: string;
 	status?: string;
 };
+
+export type SystemsData = {
+	id: number;
+	system_name: string;
+	status: string;
+};
+
+export type SystemsInsert = {
+	system_name: string;
+	status: string;
+};
+
+export type RoleData = {
+	id: number;
+	profile_id: number;
+	system_id: number;
+	system_name: string;
+	access: string;
+};
+
+export type RoleInsert = {
+	profile_id: number;
+	system_id: number;
+	access: number;
+};

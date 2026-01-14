@@ -28,7 +28,7 @@ export default class RolesController {
   async insertRoleById({ request }: HttpContext) {
     await request.validateUsing(insertRoleValidator)
     const body = request.body()
-    const roleExists = await Role.findByOrFail({
+    const roleExists = await Role.findBy({
       profile_id: body.profile_id,
       system_id: body.system_id,
     })

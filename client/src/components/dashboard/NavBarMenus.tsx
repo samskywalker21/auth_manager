@@ -38,6 +38,18 @@ const NavBarMenus = () => {
 						component={Link}
 						to='/dashboard/admin/divisions'
 					/>
+					<NavLink
+						label='Systems'
+						leftSection={<LayoutPanelTop size={'1rem'} />}
+						component={Link}
+						to='/dashboard/admin/systems'
+					/>
+					<NavLink
+						label='Roles'
+						leftSection={<LayoutPanelTop size={'1rem'} />}
+						component={Link}
+						to='/dashboard/admin/roles'
+					/>
 				</NavLink>
 			) : null}
 		</>

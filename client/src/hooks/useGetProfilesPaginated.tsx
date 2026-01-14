@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const useGetProfilesPaginated = (
@@ -28,6 +28,7 @@ const useGetProfilesPaginated = (
 				},
 			);
 		},
+		placeholderData: keepPreviousData,
 	});
 
 	return query;
