@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Flex, Image, Text } from '@mantine/core';
+import { Box, Flex, Image } from '@mantine/core';
 import login_image from '../assets/login-background.jpg';
 import LoginPanel from '../components/login/LoginPanel';
 import RegisterPanel from '../components/login/RegisterPanel';

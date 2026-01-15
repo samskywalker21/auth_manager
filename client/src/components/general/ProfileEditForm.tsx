@@ -19,7 +19,7 @@ const ProfileEditForm = ({ profile }: { profile: ProfileEdit }) => {
 	const sections = useGetSectionOptions();
 	const section_options = flattenSectionOptions(sections.data?.data ?? []);
 
-	const mutate = usePatchProfile(profile.id);
+	const mutate = usePatchProfile(profile.id ?? 0);
 
 	const form = useForm({
 		name: 'edit-form',

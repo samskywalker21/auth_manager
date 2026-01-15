@@ -1,13 +1,13 @@
-import { ActionIcon, Group, Table } from '@mantine/core';
+import { ActionIcon, Table } from '@mantine/core';
 import type { RoleData } from '../../types';
 import useGetRolesByProfile from '../../hooks/useGetRolesByProfile';
-import { Trash, Pencil, Pen } from 'lucide-react';
+import { Trash, Pencil } from 'lucide-react';
+import useDeleteRole from '../../hooks/useDeleteRole';
 
 const RoleManagerTable = ({ id }: { id: number }) => {
 	const query = useGetRolesByProfile(id);
 	const roles = query.data?.data ?? [];
-
-	console.log(query.data?.data ?? []);
+	const mutation = useDeleteRole();
 
 	const roleList = roles.map((row: RoleData) => {
 		return (
@@ -28,6 +28,7 @@ const RoleManagerTable = ({ id }: { id: number }) => {
 						<ActionIcon
 							variant='subtle'
 							c={'red'}
+							onClick={() => handleDelete(row.id)}
 						>
 							<Trash size={'1rem'} />
 						</ActionIcon>
@@ -36,6 +37,10 @@ const RoleManagerTable = ({ id }: { id: number }) => {
 			</Table.Tr>
 		);
 	});
+
+	const handleDelete = (id: number) => {
+		mutation.mutate(id);
+	};
 
 	return (
 		<Table.ScrollContainer

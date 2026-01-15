@@ -25,14 +25,14 @@ export default class RolesController {
     return res
   }
 
-  async insertRoleById({ request }: HttpContext) {
+  async insertRoleById({ request, response }: HttpContext) {
     await request.validateUsing(insertRoleValidator)
     const body = request.body()
-    const roleExists = await Role.findBy({
-      profile_id: body.profile_id,
-      system_id: body.system_id,
-    })
-    if (roleExists) {
+    const roleExists = await Role.query()
+      .where('profile_id', body.profile_id)
+      .andWhere('system_id', body.system_id)
+    if (roleExists.length > 0) {
+      response.safeStatus(500)
       return { message: 'User has this role already' }
     }
     const role = await Role.create(request.body())

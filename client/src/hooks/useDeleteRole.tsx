@@ -1,27 +1,26 @@
-import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { notifications } from '@mantine/notifications';
 import axios from 'axios';
-import type { RoleInsert } from '../types';
 
-const usePostRole = () => {
+const useDeleteRole = () => {
 	const queryClient = useQueryClient();
 	const mutation = useMutation({
 		mutationKey: ['roles'],
-		mutationFn: async (data: RoleInsert) => {
-			return await axios.post(
-				`${import.meta.env.VITE_API_URL}/profile/roles/insert`,
-				data,
+		mutationFn: async (id: number) => {
+			return await axios.delete(
+				`${import.meta.env.VITE_API_URL}/profile/roles/delete`,
 				{
 					headers: {
 						Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
 					},
+					data: { id },
 				},
 			);
 		},
 		onSuccess() {
 			notifications.show({
 				title: 'Success!',
-				message: 'Roles has been updated.',
+				message: 'Role has been removed.',
 			});
 			queryClient.invalidateQueries({ queryKey: ['roles'] });
 			mutation.reset();
@@ -39,4 +38,4 @@ const usePostRole = () => {
 	return mutation;
 };
 
-export default usePostRole;
+export default useDeleteRole;

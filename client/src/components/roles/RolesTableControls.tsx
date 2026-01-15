@@ -1,6 +1,5 @@
-import { Group, Button, TextInput, Pagination, Flex } from '@mantine/core';
-import { modals } from '@mantine/modals';
-import { Plus, Search } from 'lucide-react';
+import { Group, TextInput, Pagination, Flex } from '@mantine/core';
+import { Search } from 'lucide-react';
 
 const RolesTableControls = ({
 	searchHandler,

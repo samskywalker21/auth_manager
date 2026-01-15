@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, Badge, ActionIcon } from '@mantine/core';
+import { Table, ActionIcon } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { useDebouncedValue } from '@mantine/hooks';
 import { SquarePlus } from 'lucide-react';
